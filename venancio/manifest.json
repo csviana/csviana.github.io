@@ -1,0 +1,44 @@
+{
+    "short_name": "venancio",
+    "name": "utilweb",
+    "display": "standalone",
+    "orientation": "portrait",
+    "gcm_sender_id": "712575348763",
+    "applicationServerKey":"AIzaSyBNty08_5B9UNgHdqoDIwb7xxGIsVzy6nA",
+    "icons": [
+      {
+        "src": "img/logo48.png",
+        "type": "image/png",
+        "sizes": "48x48"
+      },
+      {
+        "src": "img/logo96.png",
+        "type": "image/png",
+        "sizes": "96x96"
+      },
+      {
+        "src": "img/logo192.png",
+        "type": "image/png",
+        "sizes": "192x192"
+      },
+      {  
+        "src": "img/logo256.png",  
+        "sizes": "256x256",  
+        "type": "image/png"  
+      },  
+      {  
+        "src": "img/logo384.png",  
+        "sizes": "384x384",  
+        "type": "image/png"  
+      },  
+      {  
+        "src": "img/logo512.png",  
+        "sizes": "512x512",  
+        "type": "image/png"  
+      }
+    ],
+    "background_color": "#FAFAFA",
+  "theme_color": "#512DA8",
+  "scope": "/",
+  "start_url": "index.html"
+  }
