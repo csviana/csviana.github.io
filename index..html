@@ -184,6 +184,10 @@
 		#desenvolvimento2 li,
 		#programas li,
 		#programas2 li,
+		#artigos li,
+		#clientes li,
+		#clientes2 li,
+		#clientes3 li,
 		#habilidades * {
 			list-style-type: none;
 		}
@@ -196,6 +200,22 @@
 			-o-filter: blur(0px);
 			-ms-filter: blur(0px);
 			filter: blur(0px);
+		}
+
+		.canvas {
+			position: absolute;
+			top: 0;
+			left: 0;
+			opacity: 0;
+			;
+			background-color: whitesmoke;
+			width: 100%;
+			height: 100%;
+		}
+
+		.canvas:hover {
+			cursor: zoom-in;
+			opacity: 1;
 		}
 	</style>
 </head>
@@ -255,7 +275,6 @@
 						<ul>
 							<li>Sustentabilidade Ambiental:
 								<ul>
-
 									<li>Derivação de Eletrólises:
 										<div class="progress">
 											<div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 50%;" aria-valuenow="50"
@@ -268,48 +287,37 @@
 											 aria-valuemin="0" aria-valuemax="100"></div>
 										</div>
 									</li>
-
+									<li>Metodologias Autossustentáveis:
+										<div class="progress">
+											<div class="progress-bar" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+										</div>
+									</li>
 								</ul>
 							</li>
 						</ul>
 						<ul>
 							<li>Desenvolvimento de Soluções:
 								<ul>
-									<li>Auditabilidade:
-										<div class="progress">
-											<div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 90%;" aria-valuenow="90"
-											 aria-valuemin="0" aria-valuemax="100"></div>
-										</div>
-									</li>
-									<li>Metodologias Autossustentáveis:
-										<div class="progress">
-											<div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 90%;" aria-valuenow="90"
-											 aria-valuemin="0" aria-valuemax="100"></div>
-										</div>
-									</li>
+
 									<li>Metodologias Organizacionais:
 										<div class="progress">
-											<div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 90%;" aria-valuenow="90"
-											 aria-valuemin="0" aria-valuemax="100"></div>
+											<div class="progress-bar" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
 										</div>
 									</li>
 									<li>Proatividade:
 										<div class="progress">
-											<div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 100%;" aria-valuenow="100"
-											 aria-valuemin="0" aria-valuemax="100"></div>
+											<div class="progress-bar" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
 										</div>
 									</li>
 									<li>Responsividade:
 										<div class="progress">
-											<div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 100%;" aria-valuenow="100"
-											 aria-valuemin="0" aria-valuemax="100"></div>
+											<div class="progress-bar" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
 										</div>
 									</li>
 
 									<li>Serviços baseados na ITIL:
 										<div class="progress">
-											<div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 100%;" aria-valuenow="100"
-											 aria-valuemin="0" aria-valuemax="100"></div>
+											<div class="progress-bar" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
 										</div>
 									</li>
 								</ul>
@@ -339,14 +347,12 @@
 									</li>
 									<li>Técnico em Seg. Eletrônica:
 										<div class="progress">
-											<div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 100%;" aria-valuenow="100"
-											 aria-valuemin="0" aria-valuemax="100"></div>
+											<div class="progress-bar" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
 										</div>
 									</li>
 									<li>Técnico em Informática:
 										<div class="progress">
-											<div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 100%;" aria-valuenow="100"
-											 aria-valuemin="0" aria-valuemax="100"></div>
+											<div class="progress-bar" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
 										</div>
 									</li>
 									<li>Técnico em Redes:
@@ -375,31 +381,15 @@
 						<ul>
 							<li>Hardware:
 								<ul>
-									<li>Conectividade:
-										<div class="progress">
-											<div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 100%;" aria-valuenow="100"
-											 aria-valuemin="0" aria-valuemax="100"></div>
-										</div>
-									</li>
-
-									<li>Controle Energético:
-										<div class="progress">
-											<div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 100%;" aria-valuenow="100"
-											 aria-valuemin="0" aria-valuemax="100"></div>
-										</div>
-									</li>
-
 									<li>Periféricos de Informática:
 										<div class="progress">
-											<div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 100%;" aria-valuenow="100"
-											 aria-valuemin="0" aria-valuemax="100"></div>
+											<div class="progress-bar" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
 										</div>
 									</li>
 
 									<li>Periféricos de Seg. Eletrônica:
 										<div class="progress">
-											<div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 100%;" aria-valuenow="100"
-											 aria-valuemin="0" aria-valuemax="100"></div>
+											<div class="progress-bar" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
 										</div>
 									</li>
 
@@ -418,8 +408,7 @@
 									</li>
 									<li>Microsoft Windows:
 										<div class="progress">
-											<div class="progress-bar progress-bar-striped progress-bar-animated " role="progressbar" style="width: 100%;" aria-valuenow="100"
-											 aria-valuemin="0" aria-valuemax="100"></div>
+											<div class="progress-bar" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
 										</div>
 									</li>
 								</ul>
@@ -436,8 +425,7 @@
 									</li>
 									<li>Microsoft Office:
 										<div class="progress">
-											<div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 100%;" aria-valuenow="100"
-											 aria-valuemin="0" aria-valuemax="100"></div>
+											<div class="progress-bar" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
 										</div>
 									</li>
 								</ul>
@@ -446,7 +434,7 @@
 						<ul>
 							<li>Animation Editor:
 								<ul>
-									<li>FlashMX:
+									<li>Flash-MX:
 										<div class="progress">
 											<div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 60%;" aria-valuenow="60"
 											 aria-valuemin="0" aria-valuemax="100"></div>
@@ -470,7 +458,12 @@
 											 aria-valuemin="0" aria-valuemax="100"></div>
 										</div>
 									</li>
-
+									<li>Blender:
+										<div class="progress">
+											<div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 70%;" aria-valuenow="70"
+											 aria-valuemin="0" aria-valuemax="100"></div>
+										</div>
+									</li>
 									<li>CorelDraw:
 										<div class="progress">
 											<div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 80%;" aria-valuenow="80"
@@ -492,14 +485,9 @@
 					<p class="lead">
 						<ul>
 
-							<li>FrameWorks:
+							<li>FrameWork:
 								<ul>
-									<li>Blender:
-										<div class="progress">
-											<div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 70%;" aria-valuenow="70"
-											 aria-valuemin="0" aria-valuemax="100"></div>
-										</div>
-									</li>
+
 									<li>Bootstrap:
 										<div class="progress">
 											<div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 70%;" aria-valuenow="70"
@@ -562,8 +550,7 @@
 								<ul>
 									<li>Arduino:
 										<div class="progress">
-											<div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 100%;" aria-valuenow="100"
-											 aria-valuemin="0" aria-valuemax="100"></div>
+											<div class="progress-bar" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
 										</div>
 									</li>
 
@@ -613,105 +600,42 @@
 			<div class="row">
 				<div class="col-md-6">
 					<p class="lead">
-						<ul id="desenvolvimento">
-							<li class="blur alert alert-dark w-100">
-								<p class="btn btn-primary w-100">IA - Inteligência Artificial</p>
-
-								<p class="alert btn-light text-center">Sistema que, de forma dinâmica, aprende a comunicar-se com os usuários para colaborar com o desenvolvimento de soluções.
-									<br/>
-									<br/>Node, Mongodb, Javascript, Bootstrap, ThreeJS e Blender </p>
-
-								Progresso:
-
-								<div class="progress">
-									<div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" style="width: 10%;" aria-valuenow="10"
-									 aria-valuemin="0" aria-valuemax="100"></div>
-								</div>
-							</li>
-
-							<li class="blur alert alert-dark w-100">
-								<p class="btn btn-primary w-100">Tradutor de Ambientes</p>
-								<p class="alert btn-light text-center">Sistema que cria, de forma dinâmica, ambientes 3d com base em simples informações fornecidas pelos usuários.
-									<br/>
-									<br/>Node, Mongodb, Javascript, Bootstrap, ThreeJS e Blender </p>
-
-								Progresso:
-								<div class="progress">
-									<div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" style="width: 10%;" aria-valuenow="10"
-									 aria-valuemin="0" aria-valuemax="100"></div>
-								</div>
-							</li>
-						</ul>
-					</p>
-				</div>
-				<div class="col-md-6">
-					<p class="lead">
-						<ul id="desenvolvimento2">
-							<li class="blur alert alert-dark w-100">
-								<p class="btn btn-primary w-100">Tradutor de Objetos</p>
-								<p class="alert btn-light text-center">Sistema que cria, de forma dinâmica, objetos 3d com base em simples informações fornecidas pelos usuários.
-									<br/>
-									<br/>Node, Mongodb, Javascript, Bootstrap, ThreeJS e Blender </p>
-
-								Progresso:
-								<div class="progress">
-									<div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" style="width: 10%;" aria-valuenow="10"
-									 aria-valuemin="0" aria-valuemax="100"></div>
-								</div>
-							</li>
-
-							<li class="blur alert alert-dark w-100">
-								<p class="btn btn-primary w-100">Ambiente Virtualizado</p>
-								<p class="alert btn-light text-center">Sistema que organiza e disponibiliza em formato web, com controles e animações, os objetos e ambientes criados, isto
-									com a ajuda do sistema IA.
-									<br/>
-									<br/>Node, Mongodb, Javascript, Bootstrap, ThreeJS e Blender </p>
-
-								Progresso:
-								<div class="progress">
-									<div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" style="width: 10%;" aria-valuenow="10"
-									 aria-valuemin="0" aria-valuemax="100"></div>
-								</div>
-							</li>
-						</ul>
-					</p>
-				</div>
-			</div>
-
-
-
-
-			<div class="row">
-				<div class="col-md-6">
-					<p class="lead">
 						<ul id="programas">
 
 
-							<li class="blur alert alert-dark w-100">
+							<li class="blur alert alert-dark w-100 text-center">
 								<p class="btn btn-danger w-100">CheckPrint</p>
-								<p class="alert btn-light text-center">Gerenciador de impressoras, com o controle de impressão e insumos, fornecimento de relatórios e suporte técnico com
-									a ajuda do sistema IA.
-									<br/>
-									<br/>Node, Mongodb, Javascript, Bootstrap, ThreeJS e Blender </p>
+								<div class="canvas alert btn-light text-center">CheckPrint:
+									<br />Gerenciador de impressoras, com o controle de impressão e insumos, fornecimento de relatórios e suporte técnico.
+								</div>
 
-								Progresso:
+								Node, Mongodb, Visual Basic, Javascript, Jquery e Bootstrap
 								<div class="progress">
-									<div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" style="width: 10%;" aria-valuenow="10"
-									 aria-valuemin="0" aria-valuemax="100"></div>
+									<div class="progress-bar bg-success" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
 								</div>
 							</li>
 
-							<li class="blur alert alert-dark w-100">
+							<li class="blur alert alert-dark w-100 text-center">
 								<p class="btn btn-danger w-100">CheckToalet</p>
-								<p class="alert btn-light text-center">Gerenciador de banheiros, com botões para relatar problemas, medir o grau de satifasção dos usuários e para solicitação
+								<div class="canvas alert btn-light text-center">CheckToalet:
+									<br/>Gerenciador de banheiros, com botões para relatar problemas, medir o grau de satifasção dos usuários e para solicitação
 									de insumos.
-									<br/>
-									<br/>Node, Mongodb, Javascript, Bootstrap, ThreeJS e Blender </p>
-
-								Progresso:
+								</div>
+								Arduino, Node, Mongodb, Visual Basic, Javascript, Jquery, Bootstrap e Photoshop
 								<div class="progress">
-									<div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" style="width: 10%;" aria-valuenow="10"
-									 aria-valuemin="0" aria-valuemax="100"></div>
+									<div class="progress-bar bg-success" role="progressbar" style="width:100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+								</div>
+							</li>
+
+							<li class="blur alert alert-dark w-100 text-center">
+								<p class="btn btn-danger w-100">CheckFace</p>
+								<div class="canvas alert btn-light text-center">CheckFace:
+									<br/>Sistema de monitoramento de acessos através de rostos, com identificações precisas de pessoas para ampliar o nível
+									de segurança.
+								</div>
+								Seg. Eletrônica, Node, Mongodb, Visual Basic, Javascript, Jquery, Bootstrap
+								<div class="progress">
+									<div class="progress-bar bg-success" role="progressbar" style="width:100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
 								</div>
 							</li>
 						</ul>
@@ -721,30 +645,39 @@
 					<p class="lead">
 						<ul id="programas2">
 
-
-							<li class="blur alert alert-dark w-100">
-								<p class="btn btn-danger w-100">CheckTable</p>
-								<p class="alert btn-light text-center">Gerenciador de mesas, ideal para bares e restaurantes, com o controle de estoque, fluxo de caixa e relatório de pedidos.
-									<br/>
-									<br/>Node, Mongodb, Javascript, Bootstrap, ThreeJS e Blender </p>
-
-								Progresso:
+							<li class="blur alert alert-dark w-100 text-center">
+								<p class="btn btn-danger w-100">CheckDesk</p>
+								<div class="canvas alert btn-light text-center">CheckDesk:
+									<br />Gerenciador de chamados técnicos referentes aos periféricos de informática e configurações de softwares.
+								</div>
+								Node, Mongodb, Visual Basic, Javascript, Jquery e Bootstrap
 								<div class="progress">
-									<div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" style="width: 10%;" aria-valuenow="10"
-									 aria-valuemin="0" aria-valuemax="100"></div>
+									<div class="progress-bar bg-success" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
 								</div>
 							</li>
 
-							<li class="blur alert alert-dark w-100">
-								<p class="btn btn-danger w-100">CheckSales</p>
-								<p class="alert btn-light text-center">Gerenciador de vendas, ideal para mercearias e pequenos comércios.
-									<br/>
-									<br/>Node, Mongodb, Javascript, Bootstrap, ThreeJS e Blender </p>
-
-								Progresso:
+							<li class="blur alert alert-dark w-100 text-center">
+								<p class="btn btn-danger w-100">CheckTable</p>
+								<div class="canvas alert btn-light text-center">CheckTable:
+									<br />Gerenciador de mesas, ideal para bares e restaurantes, com o controle de estoque, fluxo de caixa e relatório de
+									pedidos.
+								</div>
+								Arduino, Node, Mongodb, Visual Basic, Javascript, Jquery, Bootstrap e Photoshop
 								<div class="progress">
-									<div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" style="width: 10%;" aria-valuenow="10"
-									 aria-valuemin="0" aria-valuemax="100"></div>
+									<div class="progress-bar bg-success" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+								</div>
+							</li>
+
+
+							<li class="blur alert alert-dark w-100 text-center">
+								<p class="btn btn-danger w-100">CheckSales</p>
+								<div class="canvas alert btn-light text-center">CheckSales:
+									<br />Gerenciador de vendas, ideal para mercearias e pequenos comércios.
+								</div>
+
+								Arduino, Node, Mongodb, Visual Basic, Javascript, Jquery, Bootstrap e Photoshop
+								<div class="progress">
+									<div class="progress-bar bg-success" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
 								</div>
 							</li>
 						</ul>
@@ -754,51 +687,121 @@
 			<div class="row">
 				<div class="col-md-6">
 					<p class="lead">
+						<ul id="desenvolvimento">
+							<li class="blur alert alert-dark w-100 text-center">
+								<p class="btn btn-primary w-100">IA - Inteligência Artificial</p>
+
+								<div class="canvas alert btn-light text-center">IA - Inteligência Artificial:
+									<br/>Sistema que, de forma dinâmica, aprende a comunicar-se com os usuários para colaborar com o desenvolvimento de soluções.
+								</div>
+
+								Node, Mongodb, Javascript, Bootstrap, ThreeJS e Blender
+
+								<div class="progress">
+									<div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" style="width: 40%;" aria-valuenow="40"
+									 aria-valuemin="0" aria-valuemax="100"></div>
+								</div>
+							</li>
+
+							<li class="blur alert alert-dark w-100 text-center">
+								<p class="btn btn-primary w-100">Tradutor de Ambientes</p>
+								<div class="canvas alert btn-light text-center">Tradutor de Ambientes:
+									<br/>Sistema que cria, de forma dinâmica, ambientes 3d com base em simples informações fornecidas pelos usuários.
+								</div>
+
+								Node, Mongodb, Javascript, Bootstrap e ThreeJS
+								<div class="progress">
+									<div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" style="width: 5%;" aria-valuenow="5"
+									 aria-valuemin="0" aria-valuemax="100"></div>
+								</div>
+							</li>
+						</ul>
+					</p>
+				</div>
+				<div class="col-md-6">
+					<p class="lead">
+						<ul id="desenvolvimento2">
+							<li class="blur alert alert-dark w-100 text-center">
+								<p class="btn btn-primary w-100">Tradutor de Objetos</p>
+								<div class="canvas alert btn-light text-center">Tradutor de Objetos:
+									<br />Sistema que cria, de forma dinâmica, objetos 3d com base em simples informações fornecidas pelos usuários.
+								</div>
+
+								Node, Mongodb, Javascript, Bootstrap e ThreeJS
+								<div class="progress">
+									<div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" style="width: 5%;" aria-valuenow="5"
+									 aria-valuemin="0" aria-valuemax="100"></div>
+								</div>
+							</li>
+
+							<li class="blur alert alert-dark w-100 text-center">
+								<p class="btn btn-primary w-100">Ambiente Virtualizado</p>
+								<div class="canvas alert btn-light text-center">Ambiente Virtualizado:
+									<br />Sistema que organiza e disponibiliza em formato web, com controles e animações, os objetos e ambientes criados.
+								</div>
+
+								Node, Mongodb, Javascript, Bootstrap e ThreeJS
+								<div class="progress">
+									<div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" style="width: 30%;" aria-valuenow="30"
+									 aria-valuemin="0" aria-valuemax="100"></div>
+								</div>
+							</li>
+						</ul>
+					</p>
+				</div>
+			</div>
+
+
+
+
+
+			<div class="row">
+				<div class="col-md-6">
+					<p class="lead">
 						<ul id="projetos">
-							<li class="blur alert alert-dark w-100">
+							<li class="blur alert alert-dark w-100 text-center">
 								<p class="btn btn-success w-100">ES - Eletricidade Sustentável</p>
-								<p class="alert btn-light text-center">Tornar o fornecimento de eletricidade autossustentável com a tecnologia fotovoltaica.
-									<br/>
-									<br/>Node, Mongodb, Javascript, Bootstrap, ThreeJS e Blender </p>
+								<div class="canvas alert btn-light text-center">ES - Eletricidade Sustentável:
+									<br />Tornar o fornecimento de eletricidade autossustentável com a tecnologia fotovoltaica.
+								</div>
 
-								Progresso:
+								Arduino, Energia Fotovoltaica e Metodologias Autossustentáveis
 								<div class="progress">
-									<div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" style="width: 10%;" aria-valuenow="10"
+									<div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" style="width: 20%;" aria-valuenow="20"
 									 aria-valuemin="0" aria-valuemax="100"></div>
 								</div>
 							</li>
-							<li class="blur alert alert-dark w-100">
+							<li class="blur alert alert-dark w-100 text-center">
 								<p class="btn btn-success w-100">AS - Água Sustentável</p>
-								<p class="alert btn-light text-center">Tornar o fornecimento de água autossustentável com o projeto ES.
-									<br/>
-									<br/>Node, Mongodb, Javascript, Bootstrap, ThreeJS e Blender </p>
+								<div class="canvas alert btn-light text-center">AS - Água Sustentável:
+									<br />Tornar o fornecimento de água autossustentável com o projeto ES.
+								</div>
 
-								Progresso:
+								Arduino, Energia Fotovoltaica e Metodologias Autossustentáveis
 								<div class="progress">
-									<div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" style="width: 10%;" aria-valuenow="10"
+									<div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" style="width: 5%;" aria-valuenow="5"
 									 aria-valuemin="0" aria-valuemax="100"></div>
 								</div>
 							</li>
-							<li class="blur alert alert-dark w-100">
+							<li class="blur alert alert-dark w-100 text-center">
 								<p class="btn btn-success w-100">IS - Internet Sustentável</p>
-								<p class="alert btn-light text-center">Tornar o fornecimento de internet autossustentável com o projeto ES.
-									<br/>
-									<br/>Node, Mongodb, Javascript, Bootstrap, ThreeJS e Blender </p>
+								<div class="canvas alert btn-light text-center">IS - Internet Sustentável:
+									<br />Tornar o fornecimento de internet autossustentável com o projeto ES.
+								</div>
 
-								Progresso:
+								Arduino, Energia Fotovoltaica e Metodologias Autossustentáveis
 								<div class="progress">
-									<div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" style="width: 10%;" aria-valuenow="10"
+									<div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" style="width: 5%;" aria-valuenow="5"
 									 aria-valuemin="0" aria-valuemax="100"></div>
 								</div>
 							</li>
 
-							<li class="blur alert alert-dark w-100">
+							<li class="blur alert alert-dark w-100 text-center">
 								<p class="btn btn-success w-100">SM - Sol e Mar</p>
-								<p class="alert btn-light text-center">Produzir o Gás Hidrogênio, Cloro e Soda Cáustica usando o projeto ES para eletrolisar a água do mar.
-									<br/>
-									<br/>Node, Mongodb, Javascript, Bootstrap, ThreeJS e Blender </p>
-
-								Progresso:
+								<div class="canvas alert btn-light text-center">SM - Sol e Mar:
+									<br />Produzir o Gás Hidrogênio, Cloro e Soda Cáustica usando o projeto ES para eletrolisar a água do mar.
+								</div>
+								Arduino, Energia Fotovoltaica e Derivados de Eletrólises
 								<div class="progress">
 									<div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" style="width: 10%;" aria-valuenow="10"
 									 aria-valuemin="0" aria-valuemax="100"></div>
@@ -810,53 +813,53 @@
 				<div class="col-md-6">
 					<p class="lead">
 						<ul id="projetos2">
-							<li class="blur alert alert-dark w-100">
+							<li class="blur alert alert-dark w-100 text-center">
 								<p class="btn btn-success w-100">AP - Água Potável</p>
-								<p class="alert btn-light text-center">Tornar potável as águas de rios, açudes e lagoas através do Cloro líquido que será produzido no projeto SM.
-									<br/>
-									<br/>Node, Mongodb, Javascript, Bootstrap, ThreeJS e Blender </p>
+								<div class="canvas alert btn-light text-center">AP - Água Potável:
+									<br />Tornar potável as águas de rios, açudes e lagoas através do Cloro líquido que será produzido no projeto SM.
+								</div>
 
-								Progresso:
+								Arduino, Energia Fotovoltaica e Metodologias Autossustentáveis
 								<div class="progress">
-									<div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" style="width: 10%;" aria-valuenow="10"
+									<div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" style="width: 5%;" aria-valuenow="5"
 									 aria-valuemin="0" aria-valuemax="100"></div>
 								</div>
 							</li>
-							<li class="blur alert alert-dark w-100">
+							<li class="blur alert alert-dark w-100 text-center">
 								<p class="btn btn-success w-100">AD - Água Dessalenizada</p>
-								<p class="alert btn-light text-center">Produzir o Sal de Cozinha e tornar potável as águas dos mares com a destilação pela combustão do hidrogênio que será
-									produzido no projeto SM.
-									<br/>
-									<br/>Node, Mongodb, Javascript, Bootstrap, ThreeJS e Blender </p>
+								<div class="canvas alert btn-light text-center">AD - Água Dessalenizada:
+									<br />Produzir o Sal de Cozinha e tornar potável as águas dos mares com a destilação pela combustão do hidrogênio que
+									será produzido no projeto SM.
+								</div>
 
-								Progresso:
+								Arduino, Energia Fotovoltaica e Metodologias Autossustentáveis
+								<div class="progress">
+									<div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" style="width: 5%;" aria-valuenow="5"
+									 aria-valuemin="0" aria-valuemax="100"></div>
+								</div>
+							</li>
+							<li class="blur alert alert-dark w-100 text-center">
+								<p class="btn btn-success w-100">Ru Aisó - Folha Formosa</p>
+								<div class="canvas alert btn-light text-center">Ru Aisó - Folha Formosa:
+									<br />Abrigos cobertos para pontos de ônibus, com o fornecimento de Wifi e mudas para o plantil.
+								</div>
+
+								Arduino, Energia Fotovoltaica e Metodologias Autossustentáveis
 								<div class="progress">
 									<div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" style="width: 10%;" aria-valuenow="10"
 									 aria-valuemin="0" aria-valuemax="100"></div>
 								</div>
 							</li>
-							<li class="blur alert alert-dark w-100">
-								<p class="btn btn-success w-100">Ru Aisó - Flor Formosa:</p>
-								<p class="alert btn-light text-center">Abrigos cobertos para pontos de ônibus, com o fornecimento de Wifi e mudas para o plantil.
-									<br/>
-									<br/>Node, Mongodb, Javascript, Bootstrap, ThreeJS e Blender </p>
 
-								Progresso:
-								<div class="progress">
-									<div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" style="width: 10%;" aria-valuenow="10"
-									 aria-valuemin="0" aria-valuemax="100"></div>
+							<li class="blur alert alert-dark w-100 text-center">
+								<p class="btn btn-success w-100">E-Coletor</p>
+								<div class="canvas alert btn-light text-center">E-Coletor:
+									<br />Carrinhos de geladeira motorizados e cobertos com painel solar para coletores de materiais recicláveis.
 								</div>
-							</li>
 
-							<li class="blur alert alert-dark w-100">
-								<p class="btn btn-success w-100">E-Coletor:</p>
-								<p class="alert btn-light text-center">Carrinhos de geladeira motorizados e cobertos com painel solar para coletores de materiais recicláveis.
-									<br/>
-									<br/>Node, Mongodb, Javascript, Bootstrap, ThreeJS e Blender </p>
-
-								Progresso:
+								Arduino, Energia Fotovoltaica e Metodologias Autossustentáveis
 								<div class="progress">
-									<div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" style="width: 10%;" aria-valuenow="10"
+									<div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" style="width: 5%;" aria-valuenow="5"
 									 aria-valuemin="0" aria-valuemax="100"></div>
 								</div>
 							</li>
@@ -866,7 +869,102 @@
 				</div>
 			</div>
 
+			<hr class="featurette-divider">
+			<div class="col-md-12">
+				<h2 class="featurette-heading">Clientes:
+					<span class=""></span>
+				</h2>
+			</div>
+			<div class="row">
+				<div class="col-md-4">
+					<p class="lead">
+						<ul id="clientes">
+							<li class="blur alert alert-dark w-100 text-center">
+								<p class="btn btn-dark w-100">XXXXXXXXXXXXXXXX</p>
+								<br />Postos de combustíveis subsidiários dos postos BR, situados em Fortaleza-CE e na região metropolitana.
+								<br />
+								<br />CheckPrint e CheckSales
+							</li>
+							<li class="blur alert alert-dark w-100 text-center">
+								<p class="btn btn-dark w-100">XXXXXXXXXXXXX</p>
+								<br />Uma empresa de call-center situada no bairro XXXX em Fortaleza-CE.
+								<br />
+								<br />CheckPrint e CheckToalet
+							</li>
+						</ul>
+					</p>
+				</div>
+
+				<div class="col-md-4">
+					<p class="lead">
+						<ul id="clientes2">
+							<li class="blur alert alert-dark w-100 text-center">
+								<p class="btn btn-dark w-100">Seu Venâncio</p>
+								<br />Uma bodega sobre rodas fornecedora de lanches, situada na praia do futuro, em frente à Crocobeach. Fortaleza-CE
+								<br />
+								<br />CheckTable
+							</li>
+							<li class="blur alert alert-dark w-100 text-center">
+								<p class="btn btn-dark w-100">XXXXXXXXX</p>
+								<br />Uma pequena mercearia, situada no bairro XXXXXX. Fortaleza-CE
+								<br />
+								<br />CheckSales
+							</li>
+						</ul>
+					</p>
+				</div>
+
+				<div class="col-md-4">
+					<p class="lead">
+						<ul id="clientes3">
+							<li class="blur alert alert-dark w-100 text-center">
+								<p class="btn btn-dark w-100">XXXXXXXX</p>
+								<br />Um supermercado de médio porte, situado no bairro XXXXXXXX. Fortaleza-CE
+								<br />
+								<br />CheckFace e CheckPrint
+							</li>
+							<li class="blur alert alert-dark w-100 text-center">
+								<p class="btn btn-dark w-100">XXXXX</p>
+								<br />Uma pequena mercearia, situada no bairro XXXXXXX. Fortaleza-CE
+								<br />
+								<br />CheckSales
+							</li>
+						</ul>
+					</p>
+				</div>
+			</div>
+			<hr class="featurette-divider">
+			<div class="col-md-12">
+				<h2 class="featurette-heading">Artigos:
+					<span class=""></span>
+				</h2>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<p class="lead">
+						<ul id="artigos">
+							<li class="blur alert alert-secondary w-100 text-center">
+								<p class="btn btn-secondary w-100">Metodologia SCRUM, quando utilizá-la?</p>
+								<br />Neste artigo bem completo, mostro através de exemplos práticos como podemos aplicar o método SCRUM para organizarmos
+								a rotina de trabalho afim de se obtermos excelentes resultados em desenvolvimentos coletivos.
+							</li>
+							<li class="blur alert alert-secondary w-100 text-center">
+								<p class="btn btn-secondary w-100">A metodologia dos 3Rs na prática.</p>
+								<br />Neste pequeno artigo, esplano como aplicar a metodologia dos 3Rs para colaborar com a redução de custo nas empresas
+								e apresento os principais entraves na implantação e os benefícios obtidos à curto e longo prazo.
+							</li>
+							<li class="blur alert alert-secondary w-100 text-center">
+								<p class="btn btn-secondary w-100">O que é ITIL?</p>
+								<br />Demonstro neste artigo as cinco fazes de um serviço baseado nas orientações da ITIL e exemplifico as diferenças entre
+								os serviços semelhantes que seguiram todas as orientações dos quais não seguiram.
+							</li>
+						</ul>
+					</p>
+				</div>
+			</div>
+
 		</div>
+
 
 	</main>
 
@@ -874,6 +972,7 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.0/js/bootstrap.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/peppermint/1.4.0/peppermint.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/holder/2.9.4/holder.min.js"></script>
+
 </body>
 
 </html>
