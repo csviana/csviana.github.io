@@ -16,7 +16,8 @@
 <body onload="loadContas()" class="btn-danger">
     <header>
         <nav class="navbar navbar-expand-lg navbar-light fixed-top mt-0 bg-light">
-            <a class="navbar-brand" href="#"><img src="logo.png"> Seu Venâncio</a>
+            <a class="navbar-brand" href="#">
+                <img src="logo.png"> Seu Venâncio</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                 aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -38,10 +39,8 @@
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="btn dropdown-item" href="#ger_contas">Gerenciar Contas</a>
-                            <a class="btn dropdown-item" href="#">Gerenciar Pedidos</a>
                             <a class="btn dropdown-item" href="#ger_produtos">Gerenciar Produtos</a>
                             <div class="dropdown-divider"></div>
-                            <a class="btn dropdown-item" href="#">Contas Fiadas</a>
                             <a class="btn dropdown-item" onclick="fechamentoCaixa();">Encerrar Caixa</a>
                         </div>
                     </li>
@@ -73,7 +72,7 @@
                 <a class="btn btn-secondary float-right" onclick="addProduto(false)">ADD</a>
             </h3>
             <div id="produtos" class="w-100 m-0">
-               
+
             </div>
         </div>
 
@@ -82,13 +81,16 @@
         <button class="btn btn-warning float-right" onclick="javascript:demoFromHTML2()">Rel. Detalhado</button>
 
     </div>
-   
+
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.0/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.4.1/jspdf.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/2.3.4/jspdf.plugin.autotable.js"></script>
 
     <script type="text/javascript">
+        var tempaction = false;
+        var tempval = 0;
         var doc1;
         var doc2;
         function demoFromHTML() {
@@ -144,9 +146,11 @@
                     var dinheiro = parseFloat(realToNumber(total.split("|")[1]));
                     dtotal += dinheiro;
                     var fiado = parseFloat(realToNumber(total.split("|")[2].split("(")[0]));
+                    var devedor="";
+                    if(total.split("|")[2].split("(").length>1) devedor= "\n"+total.split("|")[2].split("(")[1].replace(")","");
                     var abertura = dados[3];
                     var fechamento = dados[4];
-                    rows.push([conta_id, conta, abertura, fechamento, total.split("|")[2]]);
+                    rows.push([conta_id, conta, abertura, fechamento, "E-"+total.split("|")[1]+"\nC-"+ total.split("|")[0]+ "\nF-"+numberToReal(fiado)+devedor]);
                     ftotal += fiado;
                 }
             }
@@ -158,7 +162,7 @@
 
             var doc1 = new jsPDF('p', 'pt');
             doc1.autoTable(columns, rows);
-          doc1.save('rel_geral.pdf');
+            doc1.save('rel_geral.pdf');
             //return true;
 
         }
@@ -219,7 +223,9 @@
         var quant_produto = "";
         var descr_produto = "";
         var valor_produto = "";
+        var id_produto = "";
         var select_conta = "";
+
         function loadContas() {
             for (var i = 0; i < localStorage.length; ++i) {
                 if (localStorage.key(i).indexOf("Conta") != -1) {
@@ -234,156 +240,6 @@
             }
             select_conta = "";
         }
-
-        function fechamentoCaixa() {
-                        var remover = new Array();
-                    
-
-                    for (let index = 0; index < localStorage.length; index++) {
-                        var conta_id = localStorage.key(index);
-                        if (conta_id.indexOf("Dinheiro") != -1 || conta_id.indexOf("Cartao") != -1 || conta_id.indexOf("Hibrido") != -1) {
-                            var dados = localStorage.getItem(conta_id).split(";");
-                            var conta = dados[0];
-                            var pedidos = dados[1];
-                            var pedido = pedidos.split("|");
-                            if (pedido.length > 0) {
-                                for (let index2 = 0; index2 < pedido.length; index2++) {
-                                    remover.push(pedido[index2]);
-                                }
-                            } else {
-                                remover.push(pedidos);
-                            }
-                            remover.push(conta_id);
-                        }
-                        
-                    }
-                    remover.forEach(element => {
-                        localStorage.removeItem(element);
-                    });
-
-        }
-
-        function addProduto(produtodata) {
-            var produto;
-            var valor;
-            var abertura;
-            var id_produto;
-            if (produtodata == false || produtodata == null || produtodata == "") {
-                produto = prompt("Defina o nome da Produto:");
-                if (produto == null || produto == false || produto == "") return alert("Produto Inválido, tente outro!");
-                produto = produto.toUpperCase();
-                valor = prompt("Defina o valor do Produto: " + produto, "").replace(/[,]/g, ".");
-                if (isNaN(valor) || valor == "") valor = 0;
-                abertura = new Date().getTime();
-                id_produto = "Produto" + abertura;
-            } else {
-                produto = produtodata[1];
-                abertura = produtodata[0].replace("Produto", "");
-                id_produto = produtodata[0];
-                valor = produtodata[2];
-            }
-            var produtos = $("#produtos");
-            var agora = new Date();
-            agora = agora.toLocaleDateString("pt-BR") + " " + agora.getHours() + ":" + agora.getMinutes() + ":" + agora.getSeconds();
-            if (produtodata == false) localStorage.setItem(id_produto, produto + ";" + valor + ";" + agora);
-            var produto_div = document.createElement("div");
-            produto_div.id = id_produto;
-            produto_div.className = "btn-warning row c-black m-0";
-            produto_div.innerHTML = "<div class='col btn text-left' name='descricao' onclick='addSolicitacao(\"" + id_produto + "\")'>" + produto + "</div><input class='col-3 input-group-text' type='text' name='valor' onchange='alterarProduto(\"" + id_produto + "\",this.value)' value='" + valor + "'/></div><button class='col-2 btn btn-danger border border-warning rounded' onclick='removerProduto(\"" + id_produto + "\")'>X</button>";
-            produtos.append(produto_div);
-        }
-
-        function alterarPedido(conta, produto){
-            var resposta = prompt("Redefina a quantidade do produto");
-            var dados = localStorage.getItem(conta);
-            dados.replace("|"+produto+"|","|");
-            dados.replace(produto+"|","");
-            dados.replace(produto,"");
-            localStorage.setItem(conta,dados);
-            localStorage.removeItem(produto);
-        }
-
-        function addSolicitacao(produto) {
-            if (select_conta == "") return alert("Selecione uma conta primeiro!");
-            var pedido = document.createElement("div");
-            var nomeProduto = "";
-            if (descr_produto == "") {
-                nomeProduto = $("#" + produto + " td[name='descricao'").html();
-            } else {
-                nomeProduto = descr_produto;
-            }
-            var valorProduto = "";
-            if (valor_produto == "") {
-                valorProduto = $("#" + produto + " td input[name='valor'").val();
-            } else {
-                valorProduto = parseFloat(realToNumber(valor_produto));
-
-            }
-            var quantidade = "";
-            if (quant_produto == "") {
-                var quantidade = parseInt(prompt("Defina a quantidade do Produto: " + nomeProduto + " com o valor: " + valorProduto));
-                if (quantidade <= 0 || quantidade == null || quantidade == "" || isNaN(quantidade)) return alert("Quantidade de Produto Inválida!");
-            } else {
-                quantidade = parseInt(quant_produto);
-
-            }
-            var total = valorProduto * quantidade;
-            var ttotal = $("#" + select_conta + " div label[name='total']").text();
-            var calc = realToNumber(ttotal) + parseFloat(total);
-            $("#" + select_conta + " div label[name='total']").text(numberToReal(calc));
-            var agora = new Date();
-            var agora3 = new Date().getTime();
-            var id_pedido = "Pedido" + agora3;
-
-            pedido.innerHTML = "<div onclick='alterarPedido(\""+select_conta+"\",\""+id_pedido+"\")' id='" + id_pedido + "' class='row mt-1 mb-1'><div class='col text-left'>" + quantidade + " x " + nomeProduto + "</div>x<div class='text-right col-4'>" + numberToReal(parseFloat(valorProduto)) + "</div></div>";
-            $("#" + select_conta + " div[name='pedidos']").append(pedido);
-
-            var agora2 = agora = agora.toLocaleDateString("pt-BR") + " " + agora.getHours() + ":" + agora.getMinutes() + ":" + agora.getSeconds();
-
-            if (descr_produto == "" && valor_produto == "" && quant_produto == "") {
-                localStorage.setItem(id_pedido, quantidade + ";" + produto + ";" + numberToReal(parseFloat(valorProduto)) + ";" + agora2);
-
-                var conta = localStorage.getItem(select_conta).split(";");
-                var npedidos = conta[1];
-                if (npedidos == "sem pedidos") {
-                    npedidos = id_pedido;
-                } else {
-                    npedidos += "|" + id_pedido;
-                }
-                localStorage.setItem(select_conta, conta[0] + ";" + npedidos + ";" + conta[2]);
-            } else {
-                descr_produto = "";
-                valor_produto = "";
-                quant_produto = "";
-            }
-
-        }
-
-        function alterarProduto(produto, valor) {
-            var nvalor = localStorage.getItem(produto).split(";");
-            var agora = new Date();
-            agora = agora.toLocaleDateString("pt-BR") + " " + agora.getHours() + ":" + agora.getMinutes() + ":" + agora.getSeconds();
-            nvalor = nvalor[0] + ";" + valor + ";" + agora;
-            localStorage.setItem(produto, nvalor);
-        }
-
-        function removerProduto(produto) {
-            localStorage.removeItem(produto);
-            $("#" + produto).remove();
-
-        }
-
-        function numberToReal(numero) {
-            var numero = numero.toFixed(2).split('.');
-            numero[0] = "R$ " + numero[0].split(/(?=(?:...)*$)/).join('.');
-            return numero.join(',');
-        }
-
-        function realToNumber(numero) {
-            var numero = parseInt(numero.replace("R$ ", "").replace(/[.]/g, "").replace(",", "."));
-            return numero;
-        }
-
         function addConta(contadata) {
             var conta;
             var abertura;
@@ -406,6 +262,7 @@
             var find_conta = $("#find_conta");
             var agora = new Date();
             agora = agora.toLocaleDateString("pt-BR") + " " + agora.getHours() + ":" + agora.getMinutes() + ":" + agora.getSeconds();
+
             if (contadata == false) localStorage.setItem(id_conta, conta + ";sem pedidos;" + agora);
 
             var conta_div = document.createElement("div");
@@ -429,29 +286,210 @@
             find_conta.append(conta_ul);
             if (contadata != false && contadata != null && contadata != "") {
                 var pedidos = contadata[2].split("|");
-                if (pedidos.length > 1) {
+                if (pedidos.length > 0) {
                     for (let index = 0; index < pedidos.length; index++) {
-                        var element = pedidos[index];
-                        var pedido = localStorage.getItem(element).split(";");
-                        quant_produto = pedido[0];
-                        descr_produto = localStorage.getItem(pedido[1]).split(";")[0];
-                        valor_produto = pedido[2];
-                        addSolicitacao(element);
-                    }
-                } else {
-                    pedidos = contadata[2];
-                    if (pedidos != "sem pedidos" && pedidos != "" && pedidos != null) {
-                        var pedido = localStorage.getItem(pedidos).split(";");
-                        quant_produto = pedido[0];
-                        descr_produto = localStorage.getItem(pedido[1]).split(";")[0];
-                        valor_produto = pedido[2];
-                        addSolicitacao(pedidos);
-                    }
 
+                        var element = pedidos[index];
+                        if (pedidos != "sem pedidos" && pedidos != "" && pedidos != null) {
+                            var pedido = localStorage.getItem(element).split(";");
+                            quant_produto = pedido[0];
+                            descr_produto = localStorage.getItem(pedido[1]).split(";")[0];
+                            valor_produto = pedido[2];
+                            id_produto = element;
+                            addSolicitacao(element);
+                        }
+                    }
+                }
+            }
+        }
+        function addSolicitacao(produto) {
+            var quantidade = parseFloat(0);
+            if (quant_produto != "") {
+                quantidade = parseInt(quant_produto);
+            }else{
+                quantidade = parseFloat($("#" + produto + " input[name='quantidade'").val());
+            }
+
+            if (select_conta == "") return alert("Selecione uma conta primeiro!");
+            var pedido = document.createElement("div");
+            var nomeProduto = "";
+            if (descr_produto == "") {
+                nomeProduto = $("#" + produto + " div[name='descricao'").html();
+            } else {
+                nomeProduto = descr_produto;
+            }
+            var valorProduto = "";
+            if (valor_produto == "") {
+                valorProduto = $("#" + produto + " input[name='valor'").val();
+            } else {
+                valorProduto = parseFloat(realToNumber(valor_produto));
+            }
+
+            var total = valorProduto * quantidade;
+            var ttotal = $("#" + select_conta + " div label[name='total']").text();
+            var calc = realToNumber(ttotal) + parseFloat(total);
+            $("#" + select_conta + " div label[name='total']").text(numberToReal(calc));
+            var agora = new Date();
+            var agora3 = new Date().getTime();
+
+            var id_pedido;
+            id_pedido = "Pedido" + agora3;
+            if (id_produto != "") id_pedido = id_produto;
+
+
+
+            pedido.innerHTML = "<div id='" + id_pedido + "' class='row mt-1 mb-1'><input type='number' onchange='alterarPedido(\"" + select_conta + "\",\"" + id_pedido + "\",this.value)' class='col-2  input-group-text btn' value='" + quantidade + "'><button class='col btn text-left' >" + nomeProduto + "</button><button class='text-right col-3 btn'>" + numberToReal(parseFloat(valorProduto)) + "</button></div>";
+            $("#" + select_conta + " div[name='pedidos']").append(pedido);
+
+            var agora2 = agora = agora.toLocaleDateString("pt-BR") + " " + agora.getHours() + ":" + agora.getMinutes() + ":" + agora.getSeconds();
+
+            if (descr_produto == "" && valor_produto == "" && quant_produto == "") {
+                localStorage.setItem(id_pedido, quantidade + ";" + produto + ";" + numberToReal(parseFloat(valorProduto)) + ";" + agora2);
+
+                var conta = localStorage.getItem(select_conta).split(";");
+                var npedidos = conta[1];
+                if (npedidos == "sem pedidos") {
+                    npedidos = id_pedido;
+                } else {
+                    npedidos += "|" + id_pedido;
+                }
+                localStorage.setItem(select_conta, conta[0] + ";" + npedidos + ";" + conta[2]);
+                alert(quantidade+" "+ nomeProduto + " adicionado!");
+            } else {
+                descr_produto = "";
+                valor_produto = "";
+                quant_produto = "";
+                id_produto = "";
+            }
+
+        }
+        
+        function addProduto(produtodata) {
+            var produto;
+            var valor = 0;
+            var abertura;
+            var id_produto;
+            if (produtodata == false || produtodata == null || produtodata == "") {
+                produto = prompt("Defina o nome da Produto:");
+                if (produto == null || produto == false || produto == "") return alert("Produto Inválido, tente outro!");
+                produto = produto.toUpperCase();
+                abertura = new Date().getTime();
+                id_produto = "Produto" + abertura;
+            } else {
+                produto = produtodata[1];
+                abertura = produtodata[0].replace("Produto", "");
+                id_produto = produtodata[0];
+                valor = produtodata[2];
+            }
+            var produtos = $("#produtos");
+            var agora = new Date();
+            agora = agora.toLocaleDateString("pt-BR") + " " + agora.getHours() + ":" + agora.getMinutes() + ":" + agora.getSeconds();
+            if (produtodata == false) localStorage.setItem(id_produto, produto + ";" + valor + ";" + agora);
+            var produto_div = document.createElement("div");
+            produto_div.id = id_produto;
+            produto_div.className = "btn-warning row m-0";
+            produto_div.innerHTML = "<input class='col-2 input-group-number' type='number' name='quantidade' value='1'/><div class='col alert text-left' name='descricao' onclick='addSolicitacao(\"" + id_produto + "\")'>" + produto + "</div><input class='col-3 input-group-number' type='number' name='valor' onchange='alterarProduto(\"" + id_produto + "\",this.value)' value='" + valor + "'/>";
+            produtos.append(produto_div);
+ 
+           
+        }
+
+        function fechamentoCaixa() {
+            var remover = new Array();
+            for (let index = 0; index < localStorage.length; index++) {
+                var conta_id = localStorage.key(index);
+                if (conta_id.indexOf("Dinheiro") != -1 || conta_id.indexOf("Cartao") != -1 || conta_id.indexOf("Hibrido") != -1) {
+                    var dados = localStorage.getItem(conta_id).split(";");
+                    var conta = dados[0];
+                    var pedidos = dados[1];
+                    var pedido = pedidos.split("|");
+                    if (pedido.length > 0) {
+                        for (let index2 = 0; index2 < pedido.length; index2++) {
+                            remover.push(pedido[index2]);
+                        }
+                    } else {
+                        remover.push(pedidos);
+                    }
+                    remover.push(conta_id);
                 }
 
             }
+            remover.forEach(element => {
+                localStorage.removeItem(element);
+            });
+
         }
+
+
+
+        function alterarPedido(conta, produto, quantidade) {
+            var resposta = confirm("Isso de alterar os pedidos é muito perigoso!\nTem certeza que quer continuar?");
+            if(!resposta) {
+                return location.reload();
+            }
+            if (quantidade == "" || quantidade == 0) {
+                var dados = localStorage.getItem(conta).split(";");
+                var pedidos = dados[1];
+                pedidos = pedidos.replace("|" + produto + "|", "|").replace(produto + "|", "").replace("|" + produto, "").replace(produto, "");
+                localStorage.setItem(conta, dados[0] + ";" + pedidos + ";" + dados[2]);
+                localStorage.removeItem(produto);
+                $("#" + produto).remove();
+                location.reload();
+
+            } else {
+              //  alert(conta + "\n" + produto);
+                var dados = localStorage.getItem(produto).split(";");
+                var agora = new Date();
+                agora = agora.toLocaleDateString("pt-BR") + " " + agora.getHours() + ":" + agora.getMinutes() + ":" + agora.getSeconds();
+                dados = quantidade + ";" + dados[1] + ";" + dados[2] +";"+ agora;
+                localStorage.setItem(produto, dados);
+                location.reload();
+
+            }
+
+        }
+
+        function charNumeric(mensagem) {
+            var response = $("#response");
+            $("#response input").setAttribute("type", "number");
+            $("#response label").text(mensagem);
+            response.show();
+        }
+
+        function alterarProduto(produto, valor) {
+            var nvalor = localStorage.getItem(produto).split(";");
+            var agora = new Date();
+            agora = agora.toLocaleDateString("pt-BR") + " " + agora.getHours() + ":" + agora.getMinutes() + ":" + agora.getSeconds();
+            var preço = realToNumber(valor);
+            nvalor = nvalor[0] + ";" + preço + ";" + agora;
+            localStorage.setItem(produto, nvalor);
+            $("#" + produto + " input[name='valor'").val(preço);
+            alert("O valor do produto foi alterado!");
+        }
+
+        function removerProduto(produto) {
+            localStorage.removeItem(produto);
+            $("#" + produto).remove();
+
+        }
+
+        function numberToReal(numero) {
+            var numero = numero.toFixed(2).split('.');
+            numero[0] = "R$ " + numero[0].split(/(?=(?:...)*$)/).join('.');
+            return numero.join(',');
+        }
+
+        function realToNumber(numero) {
+            if (numero=="" || numero ==null) return alert("Não é um valor válido");
+            if (numero.indexOf("R") != -1) {
+                numero = parseFloat(numero.replace("R$ ", "").replace(/[.]/g, "").replace(",", "."));
+            } else {
+                numero = parseFloat(numero.replace(",", "."));
+            }
+            return numero;
+        }
+
+
 
         function encerrarContaDinheiro(conta) {
 
@@ -460,7 +498,7 @@
             var pedidos = dados[1];
             var abertura = dados[2];
 
-            if (pedidos == "sem pedidos") {
+            if (pedidos == "sem pedidos" || pedidos == "") {
                 $("#find_conta option[value='#" + conta + "']").remove();
                 $("#" + conta).remove();
                 return localStorage.removeItem(conta);
@@ -468,6 +506,7 @@
             }
 
             var total = $("#" + conta + " label[name='total']").text();
+            
             var resposta = parseFloat(prompt("Defina o valor recebido, o valor total foi: " + total, 0));
             if (resposta < parseFloat(realToNumber(total))) {
                 return alert("Se o cliente não pagou tudo no Dinheiro então clique no botão +");
@@ -496,7 +535,7 @@
             var pedidos = dados[1];
             var abertura = dados[2];
 
-            if (pedidos == "sem pedidos") {
+         if (pedidos == "sem pedidos" || pedidos == "") {
                 $("#find_conta option[value='#" + conta + "']").remove();
                 $("#" + conta).remove();
                 return localStorage.removeItem(conta);
@@ -527,7 +566,7 @@
             var pedidos = dados[1];
             var abertura = dados[2];
 
-            if (pedidos == "sem pedidos") {
+           if (pedidos == "sem pedidos" || pedidos == "") {
                 $("#find_conta option[value='#" + conta + "']").remove();
                 $("#" + conta).remove();
                 return localStorage.removeItem(conta);
