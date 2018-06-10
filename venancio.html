@@ -17,7 +17,7 @@
     <header>
         <nav class="navbar navbar-expand-lg navbar-light fixed-top mt-0 bg-light">
             <a class="navbar-brand" href="#">
-                <img src="logo.png"> Seu Venâncio</a>
+                <img src="/logo.png"> Seu Venâncio</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                 aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -89,6 +89,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/2.3.4/jspdf.plugin.autotable.js"></script>
 
     <script type="text/javascript">
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/sw.js', { scope: '/' })
+                .then(function (reg) {
+                }).catch(function (error) {
+                });
+        }
+
         var tempaction = false;
         var tempval = 0;
         var doc1;
@@ -146,11 +153,11 @@
                     var dinheiro = parseFloat(realToNumber(total.split("|")[1]));
                     dtotal += dinheiro;
                     var fiado = parseFloat(realToNumber(total.split("|")[2].split("(")[0]));
-                    var devedor="";
-                    if(total.split("|")[2].split("(").length>1) devedor= "\n"+total.split("|")[2].split("(")[1].replace(")","");
+                    var devedor = "";
+                    if (total.split("|")[2].split("(").length > 1) devedor = "\n" + total.split("|")[2].split("(")[1].replace(")", "");
                     var abertura = dados[3];
                     var fechamento = dados[4];
-                    rows.push([conta_id, conta, abertura, fechamento, "E-"+total.split("|")[1]+"\nC-"+ total.split("|")[0]+ "\nF-"+numberToReal(fiado)+devedor]);
+                    rows.push([conta_id, conta, abertura, fechamento, "E-" + total.split("|")[1] + "\nC-" + total.split("|")[0] + "\nF-" + numberToReal(fiado) + devedor]);
                     ftotal += fiado;
                 }
             }
@@ -167,12 +174,9 @@
 
         }
 
-
-
         function demoFromHTML2() {
             var columns = ["Data/Hora", "Descrição", "Quantidade", "Valor", "Subtotal"];
             var rows = new Array();
-
 
             var dtotal = 0;
             var ctotal = 0;
@@ -306,7 +310,7 @@
             var quantidade = parseFloat(0);
             if (quant_produto != "") {
                 quantidade = parseInt(quant_produto);
-            }else{
+            } else {
                 quantidade = parseFloat($("#" + produto + " input[name='quantidade'").val());
             }
 
@@ -354,7 +358,7 @@
                     npedidos += "|" + id_pedido;
                 }
                 localStorage.setItem(select_conta, conta[0] + ";" + npedidos + ";" + conta[2]);
-                alert(quantidade+" "+ nomeProduto + " adicionado!");
+                alert(quantidade + " " + nomeProduto + " adicionado!");
             } else {
                 descr_produto = "";
                 valor_produto = "";
@@ -363,7 +367,7 @@
             }
 
         }
-        
+
         function addProduto(produtodata) {
             var produto;
             var valor = 0;
@@ -390,8 +394,8 @@
             produto_div.className = "btn-warning row m-0";
             produto_div.innerHTML = "<input class='col-2 input-group-number' type='number' name='quantidade' value='1'/><div class='col alert text-left' name='descricao' onclick='addSolicitacao(\"" + id_produto + "\")'>" + produto + "</div><input class='col-3 input-group-number' type='number' name='valor' onchange='alterarProduto(\"" + id_produto + "\",this.value)' value='" + valor + "'/>";
             produtos.append(produto_div);
- 
-           
+
+
         }
 
         function fechamentoCaixa() {
@@ -424,7 +428,7 @@
 
         function alterarPedido(conta, produto, quantidade) {
             var resposta = confirm("Isso de alterar os pedidos é muito perigoso!\nTem certeza que quer continuar?");
-            if(!resposta) {
+            if (!resposta) {
                 return location.reload();
             }
             if (quantidade == "" || quantidade == 0) {
@@ -437,11 +441,11 @@
                 location.reload();
 
             } else {
-              //  alert(conta + "\n" + produto);
+                //  alert(conta + "\n" + produto);
                 var dados = localStorage.getItem(produto).split(";");
                 var agora = new Date();
                 agora = agora.toLocaleDateString("pt-BR") + " " + agora.getHours() + ":" + agora.getMinutes() + ":" + agora.getSeconds();
-                dados = quantidade + ";" + dados[1] + ";" + dados[2] +";"+ agora;
+                dados = quantidade + ";" + dados[1] + ";" + dados[2] + ";" + agora;
                 localStorage.setItem(produto, dados);
                 location.reload();
 
@@ -480,7 +484,7 @@
         }
 
         function realToNumber(numero) {
-            if (numero=="" || numero ==null) return alert("Não é um valor válido");
+            if (numero == "" || numero == null) return alert("Não é um valor válido");
             if (numero.indexOf("R") != -1) {
                 numero = parseFloat(numero.replace("R$ ", "").replace(/[.]/g, "").replace(",", "."));
             } else {
@@ -506,7 +510,7 @@
             }
 
             var total = $("#" + conta + " label[name='total']").text();
-            
+
             var resposta = parseFloat(prompt("Defina o valor recebido, o valor total foi: " + total, 0));
             if (resposta < parseFloat(realToNumber(total))) {
                 return alert("Se o cliente não pagou tudo no Dinheiro então clique no botão +");
@@ -535,7 +539,7 @@
             var pedidos = dados[1];
             var abertura = dados[2];
 
-         if (pedidos == "sem pedidos" || pedidos == "") {
+            if (pedidos == "sem pedidos" || pedidos == "") {
                 $("#find_conta option[value='#" + conta + "']").remove();
                 $("#" + conta).remove();
                 return localStorage.removeItem(conta);
@@ -566,7 +570,7 @@
             var pedidos = dados[1];
             var abertura = dados[2];
 
-           if (pedidos == "sem pedidos" || pedidos == "") {
+            if (pedidos == "sem pedidos" || pedidos == "") {
                 $("#find_conta option[value='#" + conta + "']").remove();
                 $("#" + conta).remove();
                 return localStorage.removeItem(conta);
