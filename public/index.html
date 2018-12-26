@@ -64,6 +64,9 @@
 
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.0/css/bootstrap.min.css">
 	<style type="text/css">
+
+	.fb_iframe_widget_fluid span, iframe.fb_ltr { width: 100% !important; }
+	.fb_iframe_widget_lift { width: 100% !important; }
 		/*Corrigir bug do IE*/
 
 		@-ms-viewport {
@@ -264,7 +267,7 @@
 			<div id="habilidades" class="row">
 				<div class="col-md-6">
 					<p class="lead">
-						<ul class="alert alert-dark"><img class="btn btn-light float-right" src="ico_video.png"/>
+						<ul class="alert alert-dark"><img onclick="tocar('tgbNymZ7vqY')" class="btn btn-light float-right" src="ico_video.png"/>
 							<li class="text-left font-weight-bold">Desenvolvimento de Soluções </li>
 							<li>Sigo todas as instruções da ITIL (Information Technology Infrastructure Library) e aplico, sempre que
 								possível, a metodologia SCRUM para desenvolver todo e qualquer tipo de
@@ -682,26 +685,38 @@
 			</footer>
 			<hr class="featurette-divider">
 			<div id="fb-root"></div>
-			
 			<script>(function(d, s, id) {
-				var js, fjs = d.getElementsByTagName(s)[0];
-				if (d.getElementById(id)) return;
-				js = d.createElement(s); js.id = id;
-				js.src = 'https://connect.facebook.net/pt_BR/sdk.js#xfbml=1&version=v3.2&appId=264881444208764';
-				fjs.parentNode.insertBefore(js, fjs);
-			  }(document, 'script', 'facebook-jssdk'));</script>
-			<div class="fb-comments" data-colorscheme="dark" data-width="100%"  data-href="https://csviana.github.io/index.html" data-numposts="5"></div>
+					var js, fjs = d.getElementsByTagName(s)[0];
+					if (d.getElementById(id)) return;
+					js = d.createElement(s); js.id = id;
+					js.src = 'https://connect.facebook.net/pt_BR/sdk.js#xfbml=1&version=v3.2&appId=264881444208764';
+					fjs.parentNode.insertBefore(js, fjs);
+				  }(document, 'script', 'facebook-jssdk'));</script>
+		
+			<div class="fb-comments"  data-colorscheme="dark" data-href="https://csviana.github.io/index.html" data-numposts="5" data-width="100%" data-mobile="false"></div>
+	
+		
 
 			<hr class="featurette-divider">
 
 			<div class="row text-center">
 				<div class="col col-md text-center" ><p >© 2018 CSViana, Inc. · <a href="politica.html">Privacy</a> · <a href="politica.html">Terms</a></p></div>
 			</div>
+			
 		</div>
-
+		
+		
 
 	</main>
+	<div id="painel" style="display:none;position:fixed;top:50px;left:0;height: calc(100% - 50px);" class="btn btn-dark w-100">
+			<iframe id="video" frameborder="0" width="100%" height="100%"
+			src='about:blank'></iframe>
+			</iframe><div onclick="fecharvideo()" style="position:absolute; top:0;right:0;"  class="btn btn-danger">X</div>
+		</div>
+
 <style>
+	.fb_iframe_widget_fluid span, iframe.fb_ltr { width: 100% !important; }
+
 		.featurette{
 				display: flex;
     align-items: center;
@@ -738,6 +753,18 @@
 
 
 <script type="text/javascript" src="https://platform.linkedin.com/badges/js/profile.js" async defer></script>
+<script>
+function fecharvideo(){
+	document.getElementById("video").setAttribute("src","about:blank");
+	document.getElementById("painel").style.display="none";
+}
+
+function tocar(video){
+document.getElementById("video").setAttribute("src","https://www.youtube.com/embed/"+video+"?feature=oembed&rel=0&autoplay=1&modestbranding=1&autohide=1&showinfo=0&controls=0");
+document.getElementById("painel").style.display="block";
+}
+</script>
+
 </body>
 
 </html>
