@@ -1,0 +1,482 @@
+<html>
+	
+	<head>
+		<!-- HTML 4 -->
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<!-- HTML5 -->
+		<meta charset="utf-8"/>
+		
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+		
+		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+		
+		<script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>.
+		
+		<script
+		src="https://code.jquery.com/jquery-3.5.1.min.js"
+		integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+		crossorigin="anonymous"></script>
+		
+		<script>
+			// Your web app's Firebase configuration
+			var firebaseConfig = {
+			apiKey: "AIzaSyDDer_9AJMOG_Lxz_sm0vNcrQlMWuaL4mU",
+			authDomain: "checoffee-5810a.firebaseapp.com",
+			databaseURL: "https://checoffee-5810a.firebaseio.com",
+			projectId: "checoffee-5810a",
+			storageBucket: "checoffee-5810a.appspot.com",
+			messagingSenderId: "637898208802",
+			appId: "1:637898208802:web:00c7cf88968e469f773c7b"
+			};
+			// Initialize Firebase
+			firebase.initializeApp(firebaseConfig);
+			
+			const dbRef = firebase.database().ref();
+			const usersRef = dbRef.child('users');
+			const equipamentoRef = dbRef.child('equipamentos');
+			/* ADICIONAR USUÁRIO:
+			usersRef.set({
+			date_of_birth: "June 23, 1912",
+			full_name: "Alan Turing"
+			});
+			equipamentoRef.set({
+			md: "MODELO",
+			ns: "SERIAL",
+			or: "LOCAL DE ONDE VEIO DE ORIGEM",
+			st: "COMO ESTÁ O FUNCIONAMENTO",
+			dt: "DATA EM QUE FOI ENTREGUE",
+			cm: "COMODATO?",
+			mt: "QUAIS PEÇAS PRECISA PARA FICAR OK",
+			lc: "LOCAL AONDE ESTÁ INSTALADA",
+			rp: "RESPONSÁVEL PELA MÁQUINA",
+			ct: "CONTATO DO RESPONSÁVEL PELA MÁQUINA",
+			er: "EMAIL DO RESPONSÁVEL PELA MÁQUINA",
+			up: "DATA DA ÚLTIMA ATUALIZAÇÃO",
+			rup: "USUÁRIO QUE ATUALIZOU OS DADOS"
+			});
+			
+			EXEMPLO de cadastramento:
+			equipamentoRef.set({
+			md: "Astoria.Pratic 1G",
+			ns: "616256",
+			or: "Café de Los Compadres",
+			st: "Operacional",
+			dt: "19/06/2020",
+			cm: "SIM",
+			mt: "OK",
+			lc: "Showroom Sulfor",
+			rp: "Rondon Silva",
+			ct: "Restrito",
+			er: "Restrito",
+			up: $.now(),
+			rup: "Tec. Cleirton Viana"
+			});
+		*/
+		
+		/* Attach an asynchronous callback to read the data at our posts reference
+			usersRef.on("value", function(snapshot) {
+			console.log(snapshot.val());
+			}, function (errorObject) {
+			console.log("The read failed: " + errorObject.code);
+			
+			});
+		*/
+		var equipamentos;
+		var elemento = 1;
+		var formData;
+		// Attach an asynchronous callback to read the data at our posts reference
+		/*equipamentoRef.on("value", function(snapshot) {
+			// console.log(snapshot.val());
+			if(elemento==1){
+			elemento = 0;
+			equipamentos = snapshot.val();
+			fazerForm()
+			
+			}
+			
+			
+			}, function (errorObject) {
+			console.log("The read failed: " + errorObject.code);
+			
+			});
+			
+		*/
+		var equip;
+		var equipamento;
+		var date;
+		function fazerForm(){
+			
+			$.each(equipamentos, function(i, val){
+				var comodato;
+				if (localStorage.getItem('up') == null || localStorage.getItem('up') < val.up ){ 
+					localStorage.setItem('up', parseInt(val.up));
+				}
+				localStorage.setItem(i, JSON.stringify(val));
+				let unix_timestamp = val.up;
+				// Create a new JavaScript Date object based on the timestamp
+				// multiplied by 1000 so that the argument is in milliseconds, not seconds.
+				date = new Date(unix_timestamp);
+				if (val.cm == "SIM" || val.cm == "sim" || val.cm == "true"){comodato = "checked";}else{comodato = "";}
+				equipamento = "<TR><form id='"+i+"'>";
+				equipamento += "<TD class='modelo'><input name='md' value='"+val.md+"'/></TD>";
+				equipamento += "<TD class='serial'><input  value='"+i+"'/></TD>";
+				equipamento += "<TD class='local'><input name='lc' value='"+val.lc+"'/></TD>";
+				equipamento += "<TD class='status'><input name='st' value='"+val.st+" - "+val.mt+"'/></TD>";
+				equipamento += "<TD class='check'><input type='checkbox' name='cm' value='"+val.cm+"' "+comodato+"/></TD>";
+				equipamento += "<TD class='infor'><img class='inform center' title='Origem: "+val.or+"\nInstalada em: "+val.dt+"\nResponsável: "+val.rp+"\nTel: "+val.ct+"\nEmail: "+val.er+"\n\nAtualizado por "+val.rup+" em "+date.toLocaleString()+"'/></TD>";
+				/*
+					
+				*/
+				equipamento += "</FORM></TR>";
+				//console.log(equipamento);
+				$("#demo").html($("#demo").html() + equipamento);
+			});
+			//console.log("foi");
+		}
+		
+		function testar(botao){
+			if ($("#rup").val() == null || $("#rup").val() ==""){ console.log("Operador não definido!"); return false;}
+			var ns = botao.parentNode.parentNode.id;
+			var data = JSON.parse(localStorage.getItem(ns));
+			var md = $("#"+botao.parentNode.parentNode.id).find("[name=md]").val();
+			var lc = $("#"+botao.parentNode.parentNode.id).find("[name=lc]").val();
+			var st = $("#"+botao.parentNode.parentNode.id).find("[name=st]").val();
+			var mt = $("#"+botao.parentNode.parentNode.id).find("[name=mt]").val();
+			data.md = md;
+			var oldlc = data.lc;
+			data.lc = lc;
+			data.st = st;
+			data.mt = mt;
+			if (JSON.stringify(data) == localStorage.getItem(ns)){console.log("não há nada pra alterar no equipamento: '"+ns+"!"); return false;}
+			data.or = oldlc;
+			data.rup = $("#rup").val();
+			data.up = $.now();
+			firebase.database().ref('equipamentos/' + ns).set(data);
+			localStorage.setItem(ns, JSON.stringify(data));
+			localStorage.setItem("up", parseInt(data['up']));
+			console.log("Modificado o equipamento '"+ns+"' com sucesso!");
+			
+			
+			
+		}
+		
+		function setEquipamento(form, e){
+			e.preventDefault();
+			if ($("#rup").val() == null || $("#rup").val() ==""){ console.log("Operador não definido!"); return false;}
+			var ns;			  
+			var formdata = $(form).serializeArray();
+			var data = {};
+			$(formdata ).each(function(index, obj){
+				if (obj.name == 'ns'){ns = obj.value;}else{
+					data[obj.name] = obj.value;
+				}
+			});
+			if(ns==null){console.log("Numero de série inválido!"); return false;}
+			data['up'] = $.now();
+			data['rup'] = $("#rup").val();
+			firebase.database().ref('equipamentos/' + ns).set(data);
+			localStorage.setItem(ns, JSON.stringify(data));
+			localStorage.setItem("up", parseInt(data['up']));
+			console.log("Equipamento: '"+ns+"' configurado com sucesso!");
+			return false;
+		}
+		var val;
+		function startpag(){
+			if ($("#rup").val() == null || $("#rup").val() == ""){
+				if (localStorage.getItem("rup") != null && localStorage.getItem("rup") != "" && localStorage.getItem("rup") != "Sair"){
+					$("#rup").val(localStorage.getItem("rup"));
+					}else{
+					alert("Usuário Inválido! Selecione o usuário para ter acesso administrativo!");
+					return false;
+				}
+			}
+			//equipamentoRef.orderByChild("up").startAt(1595439521252).on("value",  function(snapshot) {console.log(snapshot.val());
+			if (localStorage.getItem('up') != null){
+				console.log("existe informações "+ localStorage.getItem('up'));
+				
+				for (var a = 0; a < localStorage.length; a++){
+					var equipamento="";
+					try{
+					
+					val = JSON.parse(localStorage.getItem(localStorage.key(a)))
+					
+					if (val.md != null){
+						var comodato;
+						var i = localStorage.key(a);
+						let unix_timestamp = val.up;
+						// Create a new JavaScript Date object based on the timestamp
+						// multiplied by 1000 so that the argument is in milliseconds, not seconds.
+						date = new Date(unix_timestamp);
+						//if (val.cm == "SIM" || val.cm == "sim" || val.cm == "true"){comodato = "checked";}else{comodato = "";}
+						equipamento += "<TD class='col-2 box'><input class='form-control' name='md' value='"+val.md+"'></TD>";
+						equipamento += "<TD class='col-1 box '><input class='form-control' name='ns' value='"+i+"'></TD>";
+						equipamento += "<TD class='col-3'><input class='form-control' name='lc' value='"+val.lc+"'></TD>";
+						equipamento += "<TD class='col-2'><input class='form-control' name='st' value='"+val.st+"'></TD>";
+						equipamento += "<TD class='col-3'><input class='form-control' name='mt' value='"+val.mt+"'></TD>";
+						/*
+							equipamento += "<input name='or' value='"+val.or+"'>";
+							equipamento += "<input name='dt' value='"+val.dt+"'>";
+							equipamento += "<input class='col d-none' name='ct' value='"+val.ct+"'>";
+							equipamento += "<input name='rp' value='"+val.rp+"'>";
+							equipamento += "<input name='er' value='"+val.er+"'>";
+							
+							equipamento += "<TD><input class='col' type='checkbox' name='cm' value='"+val.cm+"' "+comodato+">";
+						*/
+						equipamento += "<TD class='col'><img  class='inform center' title='Origem: "+val.or+"\nInstalada em: "+val.dt+"\nResponsável: "+val.rp+"\nTel: "+val.ct+"\nEmail: "+val.er+"\n\nAtualizado por "+val.rup+" em "+date.toLocaleString()+"'/></TD>";
+						equipamento += "<TD class='col'><input  onclick='testar(this)' type='submit' value='Salvar'></TD>";
+						/*
+							
+						*/
+						equipamento +="</form>";
+						var ndiv = document.createElement("TR");
+						ndiv.id = i;
+						ndiv.classList.add("row");
+						//ndiv.onsubmit = "setEquipamento(this, event)";
+						ndiv.innerHTML = equipamento;
+						//console.log(equipamento);
+						$("#demo").append(ndiv);
+					}
+				}catch (e) {
+   // declarações para manipular quaisquer exceções
+  console.log(e); // passa o objeto de exceção para o manipulador de erro
+}
+				
+				}
+				sortTable(2);
+				
+				}else{
+				console.log("CARREGANDO DADOS");
+				equipamentoRef.on("value", function(snapshot) {
+					// console.log(snapshot.val());
+					if(elemento==1){
+						elemento = 0;
+						equipamentos = snapshot.val();
+						fazerForm();
+						sortTable(2);
+						
+					}
+					
+					
+					}, function (errorObject) {
+					console.log("The read failed: " + errorObject.code);
+					
+				});
+			}
+		}
+		
+		
+		function sortTable(n) {
+			var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+			table = document.getElementById("demo");
+			switching = true;
+			// Set the sorting direction to ascending:
+			dir = "asc";
+			/* Make a loop that will continue until
+			no switching has been done: */
+			while (switching) {
+				// Start by saying: no switching is done:
+				switching = false;
+				rows = table.rows;
+				/* Loop through all table rows (except the
+				first, which contains table headers): */
+				for (i = 1; i < (rows.length - 1); i++) {
+					// Start by saying there should be no switching:
+					shouldSwitch = false;
+					/* Get the two elements you want to compare,
+					one from current row and one from the next: */
+					x = rows[i].getElementsByTagName("TD")[n];
+					y = rows[i + 1].getElementsByTagName("TD")[n];
+					/* Check if the two rows should switch place,
+					based on the direction, asc or desc: */
+					if (dir == "asc") {
+						if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+							// If so, mark as a switch and break the loop:
+							shouldSwitch = true;
+							break;
+						}
+						} else if (dir == "desc") {
+						if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+							// If so, mark as a switch and break the loop:
+							shouldSwitch = true;
+							break;
+						}
+					}
+				}
+				if (shouldSwitch) {
+					/* If a switch has been marked, make the switch
+					and mark that a switch has been done: */
+					rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+					switching = true;
+					// Each time a switch is done, increase this count by 1:
+					switchcount ++;
+					} else {
+					/* If no switching has been done AND the direction is "asc",
+					set the direction to "desc" and run the while loop again. */
+					if (switchcount == 0 && dir == "asc") {
+						dir = "desc";
+						switching = true;
+					}
+				}
+			}
+		}
+		
+		
+		function mySubmitFunction(e) {
+			e.preventDefault();
+			
+			return false;
+		}
+		function logar(){
+			if ($("#rup").val() == "Sair"){localStorage.setItem("rup","");location.reload()}
+			if ($("#rup").val() == null || $("#rup").val() == ""){
+				if (localStorage.getItem("rup") != null && localStorage.getItem("rup") != ""){
+					$("#rup").val(localStorage.getItem("rup"));
+					return true;
+					}else{
+					alert("Usuário Inválido! Selecione o usuário para ter acesso administrativo!");
+					return false;
+				}
+				}else{		
+				localStorage.setItem("rup",'"'+$("#rup").val()+'"');
+				startpag();
+				return true;
+			}
+		}
+		
+		
+	</script>
+	
+	<style>
+		.inform {
+		height: 24px;
+		width: 25px;
+		content: url('data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAQEBAQEBAQEBAQGBgUGBggHBwcHCAwJCQkJCQwTDA4MDA4MExEUEA8QFBEeFxUVFx4iHRsdIiolJSo0MjRERFwBBAQEBAQEBAQEBAYGBQYGCAcHBwcIDAkJCQkJDBMMDgwMDgwTERQQDxAUER4XFRUXHiIdGx0iKiUlKjQyNEREXP/CABEIABgAGQMBIgACEQEDEQH/xAAWAAEBAQAAAAAAAAAAAAAAAAAHCAb/2gAIAQEAAAAAqYc3j5KoMw7XQzq20T//xAAXAQADAQAAAAAAAAAAAAAAAAABBAUG/9oACAECEAAAANumYX//xAAXAQADAQAAAAAAAAAAAAAAAAADBAUH/9oACAEDEAAAAM5ePd//xAAoEAABAwMDAwMFAAAAAAAAAAACAQMEBQYRABIhExQiBzJCMVFTcpP/2gAIAQEAAT8Aq9ZfuKXPjszpMShQpLkNezdViVUZTHDoC8ODZYZLwJQwZGi8oKc3zXKFZ863YiemtPqR1V4mxNqOiPDsIQwLqiZuvlv4HI6pN1PWpPFo5z0m3zfRiQ3JeJ44KquEeadcVSVlPmBKqIPI4xhdw6iS57dOpTTbm2VGB+O4hCpIkvqkp7xRUVV3r5JlF1bMifVfUh6pFcEmWEQ31cnPvbO58e0EW09og+8e5pofhqpmyFJqpycdv2rnV3coo4VV123qr+aZ/RdXhZlSg1KXXKBDOZCln15kFlUF9l75vMZwhIfuIU8kLKpuzq3bJoFsSgezWJU1vYjDMuE+BtK2iiCjHFoSJ0UNUQ1T9dWxZFVuOZDl1qnu0+gx3Re6EodsiaYLkRJteW2cp5b8Ef0xjWE+2v/EAB8RAAICAwACAwAAAAAAAAAAAAECAxEABAUSMSEyQf/aAAgBAgEBPwDU5KwojWtUTd1fzQzscmFJYnSRELKfK/0jONvzyI0MlMsa0pPus6G3Pu7DPM/1tVA9AZ//xAAiEQACAgIBAwUAAAAAAAAAAAABAgMEBREABhIhExQjQWH/2gAIAQMBAT8AsZee5Ztsx7Iq6n4/O2bXOms1ZsVpknDP6bDtP4frmaxtdXeSIvH7h9ShDoNzGUKtCqkVePQYdzE+STz/2Q==')
+		}
+		th, .serial input{
+		text-align: center;
+		}
+		.center {
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
+		}
+		
+		td input{
+		width:100%;
+		}
+		#corpo{
+		width:100%;
+		}
+		.serial{
+		width:100px;
+		}
+		.local{
+		width:250px;
+		}
+		.status{
+		width:calc(100%-700px);
+		}
+		.check{
+		width:100px;
+		}
+		.infor{
+		width:50px;
+		}
+		td{padding:0px !important}
+		.form-control{border-radius:0px !important}
+
+	</style>
+	
+	
+</head>
+<body>
+	<datalist id='usuarios'>
+		<option value='Cleirton Viana' label='Tec. Suporte'>
+			<option value='Sair' label='deslogar'>
+			</datalist>
+			<datalist id='niveis'>
+				<option value='Baixo' label='Resolução em SETE DIAS'>
+					<option value='Médio' label='Resolução em DOIS DIAS'>
+						<option value='Alto' label='Resolução em UM DIA'>
+							<option value='Crítico' label='Resolução em OITO HORAS'>
+							</datalist>
+							
+							<div id='corpo'>
+								<div id='painel'>
+								</div>
+								<div id='campo'>
+									<div class='equipamento'>
+										
+										<input onchange="logar()" placeholder="Selecione o Operador" id='rup' list="usuarios">
+										
+										<form class='d-none' onsubmit='setEquipamento(this, event)' id="addequipamento">
+											<input placeholder="Adicione o número de Serie" name='ns' id='ns'>
+											<input placeholder="modelo" name='md' id='md'>
+											<input placeholder="origem" name='or' id='or'>
+											<input placeholder="status" name='st' id='st'>
+											<input placeholder="data de mobilização" name='dt' id='dt'>
+											<input placeholder="comodato" name='cm' id='cm'>
+											<input placeholder="manutenção" name='mt' id='mt'>
+											<input placeholder="local" id='lc' name='lc' >
+											<input placeholder="responsavel" name='rp' id='rp'>
+											<input placeholder="contato" name='ct' id='ct'>
+											<input type="email" placeholder="email" name='er' id='er'>
+											<input type="submit" value="Cadastrar">
+										</form>
+										
+									</div>
+									
+									<div class='d-none'>
+										<table>
+											<tr>REQUISIÇÃO DE DEMANDA</TR>
+											<TR><TH>SOLICITANTE:</TH><TD><INPUT id='solicitante' list="usuarios"></INPUT></TD></TR>
+											<TR><TH>DESTINO:</TD><TH><INPUT id='destino'></INPUT></TD></TR>
+											<TR><TH>DESCRIÇÃO:</TH><TD><INPUT id='descricao'></INPUT></TD></TR>
+											<TR><TH>NÍVEL</TH><TD><INPUT id='nivel' list="niveis"></INPUT></TD></TR>
+											
+										</table>
+										
+									</div>
+									
+									<div class='d-none'>
+										<table>
+											<tr>CONTAGEM DE EQUIPAMENTO</TR>
+											<TR><TH>Moedor Sanremo</TH><TD ID='moedorsanremo'></td></tr>
+											<TR><TH>Moedor Fiorenzato</TH><TD ID='fiorenzato'></td></tr>
+											<TR><TH>Moedor Ceado</TH><TD ID='ceado'></td></tr>
+											<TR><TH>Moedor Ceado Classe2</TH><TD ID='ceado2'></td></tr>
+											<TR><TH>Bianchi. Lara</TH><TD ID='bianchilara'></td></tr>
+											<TR><TH>Jura. F50</TH><TD ID='juraf50'></td></tr>
+											<TR><TH>Jura. XF50</TH><TD ID='juraxf50'></td></tr>
+											<TR><TH>Jura. ENA3</TH><TD ID='juraena3'></td></tr>
+											<TR><TH>Jura. ENA5</TH><TD ID='juraena5'></td></tr>
+											<TR><TH>Sanremo. Capri Delux 1G</TH><TD ID='capridelux1g'></td></tr>
+											<TR><TH>Sanremo. Capri Delux 2G</TH><TD ID='capridelux2g'></td></tr>
+											<TR><TH>Sanremo. Capri 2G</TH><TD ID='capri2g'></td></tr>
+											<TR><TH>Sanremo. Millano 2G</TH><TD ID='millano2g'></td></tr>
+											<TR><TH>Sanremo. Millano 3G</TH><TD ID='millano2g'></td></tr>
+											<TR><TH>Astoria. Pratic 1G</TH><TD ID='pratic1g'></td></tr>
+											<TR><TH>Astoria. Pratic 2G</TH><TD ID='pratic2g'></td></tr>
+											<TR><TH>Astoria. Avant 2G</TH><TD ID='avant2g'></td></tr>
+											<TR><TH>Astoria. Avant 3G</TH><TD ID='avant3g'></td></tr>
+											<TR><TH>Astoria. Tanya 1G</TH><TD ID='tanya1g'></td></tr>
+											<TR><TH>Astoria. Tanya 2G</TH><TD ID='tanya2g'></td></tr>
+										</table>
+									</div>
+									<table class='container' id="demo">
+										<tr class="row"  >
+											<th									class='col-2 btn-dark' onclick="sortTable(0)">EQUIPAMENTO</th>
+											<th class='col-1 btn-dark' onclick="sortTable(1)">SERIAL</th>
+											<th class='col-3 btn-dark' onclick="sortTable(2)">LOCAL</th>
+											<th class='col-2 btn-dark' onclick="sortTable(3)">STATUS</th>
+											<th class='col-3 btn-dark' onclick="sortTable(4)">MANUTENÇÃO</th>
+											<th class='col btn-dark'>INFO</th>
+											<th class='col btn-dark'></th>
+										</tr>
+									</table>
+								</div>
+							</div>
+						</body>
+					</html>																																																																																																																								
